@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using WindowsFormsAppOrarend;
+using static WindowsFormsAppOrarend.Program;
 
 namespace WindowsFormsAppOrarend
 {
@@ -13,6 +15,8 @@ namespace WindowsFormsAppOrarend
         //Connection, Command
         MySqlConnection connection;
         MySqlCommand command;
+
+        public List<Orarend> OrarendLista { get; private set; }
 
         //
         public Database()
@@ -25,6 +29,8 @@ namespace WindowsFormsAppOrarend
             builder.CharacterSet = "utf8";
             connection = new MySqlConnection(builder.ConnectionString);
             command = connection.CreateCommand();
+
+            OrarendLista = new List<Orarend>();
 
             try
             {
@@ -59,12 +65,6 @@ namespace WindowsFormsAppOrarend
             }
         }
 
-        //
-        /*public List<Orarend> GetOrarend()
-        {
-
-        }*/
-
         //Bejelentkezés
         public int Bejelentkezes(string nev, string jelszo)
         {
@@ -85,6 +85,23 @@ namespace WindowsFormsAppOrarend
             Program.formLogin.Hide();
             kapcsolatZarasa();
             return userid;
+        }
+
+        //Órarend napok betöltése -- listBox
+        public void napokBetoltese()
+        {
+            kapcsolatNyitas();
+            OrarendLista.Clear(); // Törölje a listát, mielőtt újra feltöltené
+
+            command.CommandText = "SELECT * FROM orak GROUP BY hetnapja";
+            using (MySqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    OrarendLista.Add(new Orarend(dr.GetInt32("oraid"), dr.GetString("tantargy"), dr.GetInt32("sorszam"), (HetNapja)Enum.Parse(typeof(HetNapja), dr.GetString("hetnapja"))));
+                }
+            }
+            kapcsolatZarasa();
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsFormsAppOrarend;
+using static WindowsFormsAppOrarend.Program;
 
 namespace WindowsFormsAppOrarend
 {
@@ -11,9 +13,9 @@ namespace WindowsFormsAppOrarend
         public int oraid;
         public string tantargy;
         public int sorszam;
-        public int hetnapja;
+        public HetNapja hetnapja;
 
-        public Orarend(int oraid, string tantargy, int sorszam, int hetnapja)
+        public Orarend(int oraid, string tantargy, int sorszam, HetNapja hetnapja)
         {
             this.oraid = oraid;
             this.tantargy = tantargy;
@@ -23,7 +25,7 @@ namespace WindowsFormsAppOrarend
 
         public override string ToString()
         {
-            return $"{tantargy}";
+            return $"{hetnapja}";
         }
     }
 }

@@ -12,7 +12,14 @@ namespace WindowsFormsAppOrarend
         public static FormsOrarend formOrarend = null;
         public static int UserId;
         public static Database db = new Database();
-
+        public enum HetNapja
+        {
+            hétfő,
+            kedd,
+            szerda,
+            csütörtök,
+            péntek
+        }
         static void Main()
         {
             Application.EnableVisualStyles();

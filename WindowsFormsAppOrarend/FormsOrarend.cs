@@ -16,5 +16,20 @@ namespace WindowsFormsAppOrarend
         {
             InitializeComponent();
         }
+
+        private void FormsOrarend_Load(object sender, EventArgs e)
+        {
+            Program.db.napokBetoltese();
+            UpdateListBox();
+        }
+
+        private void UpdateListBox()
+        {
+            listBox_OrarendNapok.Items.Clear();
+            foreach (var orarend in Program.db.OrarendLista)
+            {
+                listBox_OrarendNapok.Items.Add(orarend.ToString());
+            }
+        }
     }
 }
