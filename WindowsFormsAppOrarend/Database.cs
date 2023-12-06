@@ -70,7 +70,7 @@ namespace WindowsFormsAppOrarend
         {
             int userid = -1;
             kapcsolatNyitas();
-            command.CommandText = "SELECT tanarok.tanarnev, tanarok.jelszo FROM orarend WHERE tanarok.tanarnev=@nev";
+            command.CommandText = "SELECT tanarid, tanarnev, jelszo FROM tanarok WHERE tanarnev=@nev";
             command.Parameters.Clear();
             command.Parameters.AddWithValue("@nev", nev);
             MySqlDataReader reader = command.ExecuteReader();
@@ -82,10 +82,9 @@ namespace WindowsFormsAppOrarend
                     userid = reader.GetInt32("tanarid");
                 }
             }
+            Program.formLogin.Hide();
             kapcsolatZarasa();
             return userid;
         }
-
-        //
     }
 }

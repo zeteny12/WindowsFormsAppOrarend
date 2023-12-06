@@ -17,6 +17,7 @@ namespace WindowsFormsAppOrarend
             InitializeComponent();
         }
 
+        //Bejelentkezés
         private void button_Bejelentkezes_Click(object sender, EventArgs e)
         {
             if (Program.db.Bejelentkezes(textBox_Felhasznalonev.Text, textBox_Jelszo.Text) >= 0)
